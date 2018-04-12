@@ -1,0 +1,8 @@
+insertar en <head> para obtener el formato de una barra lateral
+<link rel="stylesheet" href="css/barraLateral.css">
+
+insertar una barra lateral
+id1 identifica el div q la barra puede empujar
+id2 es para identificar a la barra en si
+se pueden crear multiples barras
+<body onload=createNav(id1, id2)>
