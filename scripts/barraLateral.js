@@ -1,4 +1,13 @@
-function createNav(contID, navID) {    
+function createNav(contID, navID) { 
+    st=document.getElementById("barraLateral");
+    if (st===null){
+        st= document.createElement("link");
+        st.id="barraLateral";
+        st.setAttribute("rel","stylesheet");
+        st.setAttribute("href","./css/barraLateral.css");
+        document.head.insertBefore(st, document.getElementById("maincss"));
+    }
+    
     sn= document.createElement("div");
     sn.id=navID;
     sn.setAttribute("class","sidenav");
@@ -20,8 +29,11 @@ function createNav(contID, navID) {
 }
 
 function openNav(contID, navID) {
-    document.getElementById(navID).style.width = "250px";
-    document.getElementById(contID).style.marginRight = "250px";
+    pix="250px";
+    if (screen.height<=500)
+        pix="150px";    
+    document.getElementById(navID).style.width = pix;
+    document.getElementById(contID).style.marginRight = pix;
 }
 
 function closeNav(contID, navID) {

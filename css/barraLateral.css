@@ -41,7 +41,7 @@ body {
     padding: 16px;
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
+@media screen and (max-height: 500px) {
+  .sidenav {padding-top: 50px;}
   .sidenav a {font-size: 18px;}
 }
