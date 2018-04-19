@@ -30,13 +30,13 @@ function createNav(contID, navID) {
 
 function openNav(contID, navID) {
     pix="250px";
-    if (screen.height<=500)
-        pix="150px";    
+    if (screen.width<=500)
+        pix="150px";
     document.getElementById(navID).style.width = pix;
     document.getElementById(contID).style.marginRight = pix;
 }
 
 function closeNav(contID, navID) {
-    document.getElementById(navID).style.width = "0";
-    document.getElementById(contID).style.marginRight= "0";
+    document.getElementById(navID).style.width = "0px";
+    document.getElementById(contID).removeAttribute("style");
 }
