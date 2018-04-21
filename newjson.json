@@ -1,0 +1,15 @@
+{
+    "player": "Raptor",
+    "name"  : "Raptor",
+    "description": {
+        "gender": "male",
+        "age": 30,
+        "peso": 60,
+        "altura": 1.87,
+        "eyes": "black",
+        "hair": "black",
+        "origin": ""        
+        },
+    "rekt": {}
+    
+}
