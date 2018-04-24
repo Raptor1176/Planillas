@@ -1,32 +1,112 @@
-function completar(IDanchor){
+function completar(IDanchor){    
+    // no voy a hacer este socotroco 2 veces   
+    function crearCabecera(ID, nodoTitulo){
+        cabecera= document.createElement("div");
+        cabecera.setAttribute("class", "card-header");
+        cabeceraB= document.createElement("button");
+        cabeceraB.setAttribute("id", ID+"1");
+        cabeceraB.setAttribute("class", "btn btn-link");
+        cabeceraB.setAttribute("data-toggle", "collapse");
+        cabeceraB.setAttribute("data-target", "#"+ID+"2");
+        cabeceraB.setAttribute("aria-expanded","true");
+        cabeceraB.setAttribute("aria-controls", "name");
+        cabeceraB.appendChild(nodoTitulo);
+        cabecera.appendChild(cabeceraB);
+        return cabecera;        
+    }
+    // ni este
+    function crearCuerpo(ID, nodoContenido, anchor){
+        cuerpo= document.createElement("div");    
+        cuerpo.setAttribute("id", ID+"2");
+        cuerpo.setAttribute("class","collapse");
+        cuerpo.setAttribute("aria-labelledby",ID+"1");
+        cuerpo.setAttribute("data-parent","#"+ anchor);
+        cuerpo.appendChild(nodoContenido);
+        return cuerpo;
+    }
     
     datos= JSON.parse('{"player": "Raptor","name"  : "Raptor","description": {"gender": "male","age": 30,"peso": 60,"altura": 1.87,"eyes": "black","hair": "black","origin": ""},"rekt": {}}');
     
+    //Imagen lateral
+    lateral= document.createElement("div");
+    lateral.setAttribute("class","col-4 card d-none d-sm-none d-md-block");    
+    lateral.appendChild(document.createElement("img"));
+    lateral.firstChild.src="./imagenes/fullbody.jpg";        
+    
+    tabla= document.createElement("div");
+    tabla.setAttribute("class","col-8 card");
+    tabla.appendChild(document.createTextNode("paneles"));
+    
+    aux= document.createElement("div");
+    aux.setAttribute("class", "row");
+    
+    for (i=0; i<2; i++){
+        panel=document.createElement("div");
+        panel.setAttribute("class", "col-6 card");
+        p= document.createElement("div");
+        p.setAttribute("class", "card");
+        p.appendChild(crearCabecera("panel"+i,document.createTextNode("Panel "+i)));
+        p.appendChild(crearCuerpo("panel"+i, document.createTextNode("contenido"), "panel"+i));
+        panel.appendChild(p);
+        aux.appendChild(panel);
+    }
+    tabla.appendChild(aux);
+    /*
+                <div class="col-9 card">
+                    paneles
+                    <div class="row">
+                        <div class="col-6 card">
+                            primer panel
+                        </div>
+                        <div class="col-6 card">
+                            segundo panel
+                        </div>
+                        <div class="col-12 card">
+                            otros
+                            <div class="row"> 
+                                <div class="col-3 card">
+                                    1
+                                </div>
+                                <div class="col-3 card">
+                                    2
+                                </div>
+                                <div class="col-3 card">
+                                    3
+                                </div><div class="col-3 card">
+                                    4
+                                </div>                                
+                            </div> 
+                            continua
+                            <div class="row"> 
+                                <div class="col-3 card">
+                                    1
+                                </div>
+                                <div class="col-3 card">
+                                    2
+                                </div>
+                                <div class="col-3 card">
+                                    3
+                                </div><div class="col-3 card">
+                                    4
+                                </div>                                
+                            </div> 
+                        </div>
+                        y se va de rango
+                    </div>
+                </div>
+            </div>
+    */
     // par -> cabecera / contenido
     par= document.createElement("div");
     par.setAttribute("class", "card");
-        
-    cabecera= document.createElement("div");
-    cabecera.setAttribute("class", "card-header mb-0");
-    cabeceraB= document.createElement("button");
-    cabeceraB.setAttribute("id", "personaje1");
-    cabeceraB.setAttribute("class", "btn btn-link");
-    cabeceraB.setAttribute("data-toggle","collapse");
-    cabeceraB.setAttribute("data-target","#personaje2");
-    cabeceraB.setAttribute("aria-expanded","true");
-    cabeceraB.setAttribute("aria-controls","name");
-    cabeceraB.appendChild(document.createTextNode("PERSONAJE"));
+    par.appendChild(crearCabecera("personaje", document.createTextNode("PERSONAJE")));
     
-    cuerpo= document.createElement("div");    
-    cuerpo.setAttribute("id", "personaje2");
-    cuerpo.setAttribute("class","collapse show");
-    cuerpo.setAttribute("aria-labelledby","personaje1");
-    cuerpo.setAttribute("data-parent","#"+ IDanchor);
-    cuerpo.appendChild(document.createTextNode("asdasdasdsad"));
+    cuerpo= document.createElement("div");
+    cuerpo.setAttribute("class","row d-flex justify-content-center");
+    cuerpo.appendChild(lateral);
+    cuerpo.appendChild(tabla);
+    par.appendChild(crearCuerpo("personaje", cuerpo, IDanchor));
     
-    cabecera.appendChild(cabeceraB);
-    par.appendChild(cabecera);
-    par.appendChild(cuerpo);
     
     document.getElementById(IDanchor).appendChild(par);
 }

@@ -8,11 +8,11 @@
 
         <script src="./scripts/barraLateral.js"></script>
         <script src="./scripts/barraPrincipal.js"></script>
-        <script src="./scripts/conpletar.js"></script>
+        <script src="./scripts/completar.js"></script>
         <script>
             function initPage() {
-               // createNav("contenido", "barra");
-               // createMainBar("principal");
+                createNav("contenido", "barra");
+                createMainBar("principal");
                 completar("contenido");
             }
         </script>
@@ -20,8 +20,53 @@
     </head>
     <body onload='initPage()'>    
         <br>
-        <div id="contenido" class="container">
-           
+        <div id="contenido" class="container"> <div class="row d-flex justify-content-center">
+                <div class="col-3 card d-none d-sm-none d-md-block">
+                    lateral
+                </div>
+                <div class="col-9 card">
+                    paneles
+                    <div class="row">
+                        <div class="col-6 card">
+                            primer panel
+                        </div>
+                        <div class="col-6 card">
+                            segundo panel
+                        </div>
+                        <div class="col-12 card">
+                            otros
+                            <div class="row"> 
+                                <div class="col-3 card">
+                                    1
+                                </div>
+                                <div class="col-3 card">
+                                    2
+                                </div>
+                                <div class="col-3 card">
+                                    3
+                                </div><div class="col-3 card">
+                                    4
+                                </div>                                
+                            </div> 
+                            continua
+                            <div class="row"> 
+                                <div class="col-3 card">
+                                    1
+                                </div>
+                                <div class="col-3 card">
+                                    2
+                                </div>
+                                <div class="col-3 card">
+                                    3
+                                </div><div class="col-3 card">
+                                    4
+                                </div>                                
+                            </div> 
+                        </div>
+                        y se va de rango
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
