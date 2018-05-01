@@ -41,14 +41,37 @@ function completar(IDanchor){
     aux.setAttribute("class", "row");
     
     for (i=0; i<2; i++){
-        panel=document.createElement("div");
-        panel.setAttribute("class", "col-6 card");
         p= document.createElement("div");
-        p.setAttribute("class", "card");
+        p.setAttribute("class", "card col-6");
         p.appendChild(crearCabecera("panel"+i,document.createTextNode("Panel "+i)));
         p.appendChild(crearCuerpo("panel"+i, document.createTextNode("contenido"), "panel"+i));
-        panel.appendChild(p);
-        aux.appendChild(panel);
+        aux.appendChild(p);
+    }
+    tabla.appendChild(aux);
+    
+    aux= document.createElement("div");
+    aux.setAttribute("class", "row");
+    tabla.appendChild(document.createTextNode("paneles 2"));
+    
+    for (i=0; i<4; i++){
+        p= document.createElement("div");
+        p.setAttribute("class", "card col-3");
+        p.appendChild(crearCabecera("next"+i,document.createTextNode(i)));
+        p.appendChild(crearCuerpo("next"+i, document.createTextNode("contenido"), "next"+i));
+        aux.appendChild(p);
+    }
+    tabla.appendChild(aux);
+    
+    aux= document.createElement("div");
+    aux.setAttribute("class", "row");
+    tabla.appendChild(document.createTextNode("paneles 3"));
+    
+    for (i=0; i<4; i++){
+        p= document.createElement("div");
+        p.setAttribute("class", "card col-3");
+        p.appendChild(crearCabecera("next1"+i,document.createTextNode(i)));
+        p.appendChild(crearCuerpo("next1"+i, document.createTextNode("contenido"), "next1"+i));
+        aux.appendChild(p);
     }
     tabla.appendChild(aux);
     /*
