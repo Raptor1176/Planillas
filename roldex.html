@@ -1,0 +1,83 @@
+<head>
+	<title> pokecalk, the K make it look Kool</title>
+	<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="http://pkmn-argentina.com/halloffame/reborn/js/data.js?v=20"></script>
+	
+	<script>
+	function cargarpk(){
+		p=document.getElementById("pokes");
+		p= cachedMons[p.options[p.selectedIndex].value];
+		document.getElementById("sprite").src= p.sprites.front_default;		
+		if(p.types.length==2)
+			document.getElementById("type").innerHTML= p.types[1].type.name +" / "+ p.types[0].type.name;
+		else
+			document.getElementById("type").innerHTML= p.types[0].type.name;
+		
+		s= document.getElementById("stats");
+		s.innerHTML = '<tr><th>Stats</th></tr>';
+		for( i=5; i>=0; i--){
+			si = document.createElement("tr");
+			//stat name
+			siv= document.createElement("td");
+			siv.innerHTML=p.stats[i].stat.name;
+			si.appendChild(siv);
+			
+			//stat value
+			siv= document.createElement("td");
+			siv.innerHTML=p.stats[i].base_stat;
+			si.appendChild(siv);
+			
+			s.appendChild(si);
+		}
+		
+		mt= document.getElementById("moves");
+		mt.innerHTML= '<tr><th>Moves</th></tr>';
+		p.moves.forEach(
+		function tablear(value, index, array){
+			m= document.createElement("tr");
+			m.innerHTML= "<td>"+value.move.name+"</td><td>"+value.version_group_details[0].move_learn_method.name+"</td><td>"+value.version_group_details[0].level_learned_at+"</td>";
+			mt.appendChild(m);
+		}	
+		);
+		
+	}
+	
+	</script>
+</head>
+
+<body>
+	<div class="row">
+		<div class="col-sm-4">
+			<select name="pokes" size="25" id="pokes" onchange="cargarpk()">
+			</select>	
+		</div>
+		<div class="col-sm-4">
+			<img id="sprite" src=""><a id="type"></a><br/>
+			<table id="stats">
+			</table>
+		</div>
+		<div class="col-sm-4">
+			<table id="moves">
+			</table>
+		</div>
+	</div>
+
+ <script>
+	var txt="<option value='_'> </option>";
+	var names= Object.keys(cachedMons);
+	names.forEach(idk);
+	
+	function idk(value, index, array){
+		txt+="<option value="+value+">"+value+"</option>";
+	}
+				
+	document.getElementById("pokes").innerHTML =txt;
+
+	</script>
+	
+	
+</body>
