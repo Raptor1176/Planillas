@@ -4,8 +4,10 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-	<script src="./scripts/data.js"></script>
+<link rel="stylesheet" href="./roldex.css">
+	
+<!--	<script type="text/javascript" src="http://pkmn-argentina.com/halloffame/reborn/js/data.js?v=20"></script>-->
+	<script type="text/javascript" src="./data.js"></script>
 	
 	<script>
 	function cargarpk(){
@@ -18,12 +20,45 @@
 			document.getElementById("type").innerHTML= p.types[0].type.name;
 		
 		s= document.getElementById("stats");
-		s.innerHTML = '<tr><th>Stats</th></tr>';
+		s.innerHTML = '<tr id="head"><th>Stat</th><th>Base</th><th>Dados hasta nivel...</th></tr>';
+		
+		var allvals = new Array(100);
+		for (lvl=1; lvl<=100; lvl++){
+			allvals[lvl]= new Array(6);
+			for( i=5; i>=0; i--){
+				allvals[lvl][i]=1 + Math.floor(lvl * p.stats[i].base_stat / 1100);		
+			}
+		}
+	
+		si = document.createElement("tr");
+		siv= document.createElement("th");
+		siv.innerHTML=" ";
+		si.appendChild(siv);
+		siv= document.createElement("th");
+		siv.innerHTML=" ";
+		si.appendChild(siv);
+
+
+		for (lvl=2; lvl<=100; lvl++){
+		igual=true;
+			for(i=0; i<6; i++)
+				igual=igual & (allvals[lvl][i]==allvals[lvl-1][i])
+			if(igual)
+				allvals[lvl-1]=[-1];
+			else{
+					siv= document.createElement("td");
+					siv.innerHTML=lvl;
+					si.appendChild(siv);
+					}
+		}
+		
+		s.appendChild(si);
+		
 		for( i=5; i>=0; i--){
 			si = document.createElement("tr");
 			//stat name
 			siv= document.createElement("td");
-			siv.innerHTML=p.stats[i].stat.name;
+			siv.innerHTML= p.stats[i].stat.name;			
 			si.appendChild(siv);
 			
 			//stat value
@@ -31,8 +66,29 @@
 			siv.innerHTML=p.stats[i].base_stat;
 			si.appendChild(siv);
 			
+			for(lvl=1; lvl<=100; lvl++){
+				if(allvals[lvl][0]>0){
+					siv= document.createElement("td");
+					siv.innerHTML=allvals[lvl][i];	
+					si.appendChild(siv);
+				}
+			/*
+			anterior= [0,0,0,0,0,0];
+			for(lvl=1; lvl<=100; lvl++){
+				escribir=false;
+				for(j=0; j<6; j++)
+					escribir=escribir | (allvals[lvl][j]!=anterior[j]);
+				if(escribir){
+					anterior=allvals[lvl];
+					siv= document.createElement("td");
+					siv.innerHTML=allvals[lvl][i];	
+					si.appendChild(siv);
+				}
+				*/	
+			}
 			s.appendChild(si);
-		}
+			
+		}		
 		
 		mt= document.getElementById("moves");
 		mt.innerHTML= '<tr><th>Moves</th></tr>';
@@ -41,8 +97,7 @@
 			m= document.createElement("tr");
 			m.innerHTML= "<td>"+value.move.name+"</td><td>"+value.version_group_details[0].move_learn_method.name+"</td><td>"+value.version_group_details[0].level_learned_at+"</td>";
 			mt.appendChild(m);
-		}	
-		);
+		});
 		
 	}
 	
@@ -51,21 +106,32 @@
 
 <body>
 	<div class="row">
-		<div class="col-sm-4">
-			<select name="pokes" size="25" id="pokes" onchange="cargarpk()">
-			</select>	
+		<div class="col-sm-1">
+		buscar:
+		</div>		
+		<div class="col-sm-11">
+		<select name="pokes" id="pokes" onchange="cargarpk()">
+		</select>	
 		</div>
-		<div class="col-sm-4">
+	</div>
+	<div class="row">
+		<div class="col-sm-7">
 			<img id="sprite" src=""><a id="type"></a><br/>
 			<table id="stats">
 			</table>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			<table id="moves">
 			</table>
 		</div>
 	</div>
-
+	<div class="row">
+		<div class="col">
+			<table id="growth">
+			</table>
+		</div>
+		</div>
+	
  <script>
 	var txt="<option value='_'> </option>";
 	var names= Object.keys(cachedMons);
