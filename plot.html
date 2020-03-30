@@ -2,13 +2,41 @@
 	<title>Plot</title>
 	<meta charset="UTF-8">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="http://pkmn-argentina.com/halloffame/reborn/js/data.js?v=20"></script>
-
+	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	
+	<script>
+	
+		function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+
+		function getUrlParam(parameter, defaultvalue){
+			var urlparameter = defaultvalue;
+			if(window.location.href.indexOf(parameter) > -1){
+				urlparameter = getUrlVars()[parameter];
+			}
+			return urlparameter;
+		}
+
+
+	
+		function ver(){
+			v= getUrlParam("v","false")	
+			if(v=="true"){
+				document.getElementById("historia").setAttribute("class", "container");
+			}
+		}
+	</script>
+
 </head>
 
-<body>
+<body onload="ver()">
 	<div class="container">
 		<div class="row">
 			<div class="col-10">
@@ -72,7 +100,7 @@
 				</div>
 			</div><br/><br/>
 
-	<div class="container d-none">
+	<div id="historia" class="container d-none">
 		<div class="row">
 			<div class="col-12">
 				<font size="6">Inicio</font><br/><br/>
